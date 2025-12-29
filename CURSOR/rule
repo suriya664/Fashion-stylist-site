@@ -1,0 +1,49 @@
+* Always add a favicon to the browser tab for branding.
+* Verify the favicon appears correctly on all pages, not just the homepage.
+* Ensure the logo is clickable and redirects to the homepage.
+* Maintain equal spacing between menu items in the navigation bar.
+* Avoid any extra empty space below the navbar or before headings (h1, h2).
+* Keep the navbar consistent on all pages, including Login and Register.
+* Highlight the active page in the menu (active link state).
+* Test navbar responsiveness on all screen sizes (mobile, tablet, desktop).
+* Center-align all subheadings (h2, h3) below main titles.
+* Maintain a consistent font hierarchy (h1 > h2 > h3 > p).
+* Apply standard font weights: h1 = 700, h2 = 600, h3 = 500.
+* Avoid inconsistent capitalization or spacing in text.
+* Ensure proper line height and text contrast for readability.
+* Align all CTA (Call-To-Action) cards evenly and maintain equal height.
+* Maintain alignment consistency in all review/testimonial cards.
+* Avoid using button colors that match the background color.
+* Apply hover effects (color change, shadow, or scale) on all buttons.
+* Use actionable CTA text (e.g., "Get Started," "Learn More").
+* Use relevant, high-quality images that fit the content.
+* Ensure images are cropped properly and not stretched or pixelated.
+* Match image card proportions to nearby text or content blocks.
+* Optimize images for web performance (compression, lazy-load).
+* Use licensed or free third-party image sources (Unsplash, Pexels, etc.).
+* Use original social media brand icons (Facebook, Instagram, etc.).
+* Apply hover effects to social icons.
+* Use official brand colors for each social media icon/button.
+* Ensure all social media icons link correctly to their pages.
+* Design the footer perfectly (About, Quick Links, Contact, Copyright).
+* Keep footer layout consistent across all pages.
+* Open external footer links in a new browser tab.
+* Ensure footer social icons are aligned and visible.
+* Always use a "+" symbol before international phone numbers.
+* Verify all contact details (phone, email, map) are clickable.
+* Check contact forms — validation, AJAX, success and error messages.
+* Maintain consistent padding and margins across all sections.
+* Ensure sufficient color contrast between background and text/buttons.
+* Use consistent border-radius and shadow effects for cards and elements.
+* Verify hover, focus, and active states for all buttons and links.
+* Prevent content overlap or spacing issues in responsive layouts.
+* Ensure smooth scroll behavior without layout shifting.
+* Test that all links and buttons lead to the correct pages.
+* Ensure the entire site is responsive for all screen sizes (mobile, tablet, desktop).
+* Justify content and align items properly in all sections.
+* Use standard, readable font sizes across all pages.
+* Balance pages with appropriate imagery where it enhances content.
+* Test responsive design at these breakpoints:
+  - Mobile: 360×800 (Android), 390×844 (iPhone)
+  - Tablet: 768×1024 (iPad), 800×1280 (Android tablets)
+  - Desktop: 1920×1080 and above

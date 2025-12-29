@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StyleLux Dashboard - Your personal style management center">
+    <title>Dashboard | StyleLux</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Quicksand:wght@300;400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-container {
+            min-height: 100vh;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(229, 124, 74, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-header-content {
+            flex: 1;
+        }
+
+        .dashboard-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            font-size: 1.1rem;
+            color: rgba(255, 248, 240, 0.8);
+        }
+
+        .dashboard-header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logout-btn,
+        .home-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--burnt-orange);
+            color: var(--burnt-orange);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(229, 124, 74, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover,
+        .home-btn:hover {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--golden-amber));
+            color: var(--warm-cream);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(244, 162, 97, 0.5);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--golden-amber));
+            color: var(--warm-cream);
+            border: 2px solid transparent;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 162, 97, 0.6);
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background-color: var(--primary-brown);
+            border: 2px solid transparent;
+            background-image: 
+                linear-gradient(var(--primary-brown), var(--primary-brown)),
+                linear-gradient(135deg, var(--burnt-orange), var(--copper-rose), var(--golden-amber));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(26, 15, 10, 0.5);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(244, 162, 97, 0.4);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--golden-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--burnt-orange);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-section {
+            background-color: var(--primary-brown);
+            border: 2px solid transparent;
+            background-image: 
+                linear-gradient(var(--primary-brown), var(--primary-brown)),
+                linear-gradient(135deg, var(--burnt-orange), var(--copper-rose), var(--golden-amber));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(26, 15, 10, 0.5);
+        }
+
+        .dashboard-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--burnt-orange);
+            text-align: left;
+        }
+
+        .activity-item {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(229, 124, 74, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .activity-date {
+            color: var(--golden-amber);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-text {
+            color: rgba(255, 248, 240, 0.9);
+        }
+
+        .appointment-card {
+            background-color: var(--dark-chocolate);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--burnt-orange);
+        }
+
+        .appointment-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .appointment-date {
+            color: var(--golden-amber);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .appointment-service {
+            color: var(--burnt-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .appointment-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .status-upcoming {
+            background-color: rgba(244, 162, 97, 0.2);
+            color: var(--golden-amber);
+            border: 1px solid var(--golden-amber);
+        }
+
+        .status-completed {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+        }
+
+        .wardrobe-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--dark-chocolate);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .wardrobe-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .wardrobe-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--golden-amber));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .wardrobe-info {
+            flex: 1;
+        }
+
+        .wardrobe-name {
+            color: var(--burnt-orange);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .wardrobe-count {
+            color: rgba(255, 248, 240, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--dark-chocolate);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--golden-amber));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--golden-amber));
+            color: var(--warm-cream);
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 162, 97, 0.6);
+        }
+
+        @media (max-width: 1024px) {
+            .logout-btn,
+            .home-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-header-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .logout-btn,
+            .home-btn {
+                flex: 1;
+                min-width: 100px;
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                justify-content: center;
+            }
+
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logout-btn,
+            .home-btn {
+                padding: 0.45rem 0.85rem;
+                font-size: 0.75rem;
+                min-width: 90px;
+            }
+
+            .dashboard-header-actions {
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="dashboard-header-content">
+                <h1>Welcome Back!</h1>
+                <p>Here's an overview of your style journey with StyleLux</p>
+            </div>
+            <div class="dashboard-header-actions">
+                <a href="index.html" class="home-btn">Back to Home</a>
+                <button class="logout-btn" id="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Total Appointments</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Completed Sessions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Wardrobe Items</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Upcoming Events</div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="dashboard-content">
+            <!-- Upcoming Appointments -->
+            <div class="dashboard-section">
+                <h2>Upcoming Appointments</h2>
+                <div class="appointment-card">
+                    <div class="appointment-date">March 15, 2025 - 2:00 PM</div>
+                    <div class="appointment-service">Personal Styling Consultation</div>
+                    <p style="color: rgba(255, 248, 240, 0.8); margin: 0.5rem 0;">Complete wardrobe analysis and style assessment</p>
+                    <span class="appointment-status status-upcoming">Upcoming</span>
+                </div>
+                <div class="appointment-card">
+                    <div class="appointment-date">March 22, 2025 - 10:00 AM</div>
+                    <div class="appointment-service">Shopping Session</div>
+                    <p style="color: rgba(255, 248, 240, 0.8); margin: 0.5rem 0;">Personal shopping at premium boutiques</p>
+                    <span class="appointment-status status-upcoming">Upcoming</span>
+                </div>
+                <div class="appointment-card">
+                    <div class="appointment-date">March 8, 2025 - 3:00 PM</div>
+                    <div class="appointment-service">Wardrobe Audit</div>
+                    <p style="color: rgba(255, 248, 240, 0.8); margin: 0.5rem 0;">Comprehensive wardrobe evaluation completed</p>
+                    <span class="appointment-status status-completed">Completed</span>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-section">
+                <h2>Recent Activity</h2>
+                <div class="activity-item">
+                    <div class="activity-date">March 10, 2025</div>
+                    <div class="activity-text">Added 5 new items to your digital wardrobe</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-date">March 8, 2025</div>
+                    <div class="activity-text">Completed wardrobe audit session</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-date">March 5, 2025</div>
+                    <div class="activity-text">Received style recommendations for spring collection</div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-date">March 1, 2025</div>
+                    <div class="activity-text">Scheduled personal styling consultation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wardrobe Overview -->
+        <div class="dashboard-section">
+            <h2>Wardrobe Overview</h2>
+            <div class="wardrobe-item">
+                <div class="wardrobe-icon">👔</div>
+                <div class="wardrobe-info">
+                    <div class="wardrobe-name">Tops & Blouses</div>
+                    <div class="wardrobe-count">42 items</div>
+                </div>
+            </div>
+            <div class="wardrobe-item">
+                <div class="wardrobe-icon">👗</div>
+                <div class="wardrobe-info">
+                    <div class="wardrobe-name">Dresses</div>
+                    <div class="wardrobe-count">28 items</div>
+                </div>
+            </div>
+            <div class="wardrobe-item">
+                <div class="wardrobe-icon">👖</div>
+                <div class="wardrobe-info">
+                    <div class="wardrobe-name">Bottoms</div>
+                    <div class="wardrobe-count">35 items</div>
+                </div>
+            </div>
+            <div class="wardrobe-item">
+                <div class="wardrobe-icon">👠</div>
+                <div class="wardrobe-info">
+                    <div class="wardrobe-name">Shoes</div>
+                    <div class="wardrobe-count">31 items</div>
+                </div>
+            </div>
+            <div class="wardrobe-item">
+                <div class="wardrobe-icon">👜</div>
+                <div class="wardrobe-info">
+                    <div class="wardrobe-name">Accessories</div>
+                    <div class="wardrobe-count">20 items</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style Progress -->
+        <div class="dashboard-section">
+            <h2>Your Style Journey</h2>
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--burnt-orange); font-weight: 600;">Profile Completion</span>
+                    <span style="color: var(--golden-amber);">85%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--burnt-orange); font-weight: 600;">Style Goals Achieved</span>
+                    <span style="color: var(--golden-amber);">70%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--burnt-orange); font-weight: 600;">Wardrobe Organization</span>
+                    <span style="color: var(--golden-amber);">92%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-section">
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="services.html" class="action-btn">Book Appointment</a>
+                <a href="portfolio.html" class="action-btn">View Portfolio</a>
+                <a href="contact.html" class="action-btn">Contact Stylist</a>
+                <a href="blog.html" class="action-btn">Read Blog</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            // Clear any stored session data (if using localStorage/sessionStorage)
+            if (typeof(Storage) !== "undefined") {
+                localStorage.removeItem('user');
+                sessionStorage.removeItem('user');
+            }
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
+
+
+
+

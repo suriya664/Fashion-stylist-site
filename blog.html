@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fashion tips, style guides, and latest trends from StyleLux fashion experts">
+    <title>Blog | StyleLux Fashion Stylist</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Quicksand:wght@300;400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .blog-main {
+            display: grid;
+            gap: 2rem;
+        }
+        .blog-post {
+            background-color: var(--charcoal);
+            border: 1px solid var(--luxury-gold);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        .blog-post-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            background-color: var(--charcoal);
+        }
+        .blog-post-image[src=""],
+        .blog-post-image:not([src]) {
+            opacity: 0.5;
+        }
+        .blog-post-content {
+            padding: 2rem;
+        }
+        .blog-post-meta {
+            color: var(--luxury-gold);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .blog-post h3 {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .blog-post p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .blog-post-link {
+            color: var(--luxury-gold);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: block;
+            text-align: center;
+        }
+        .blog-post-link:hover {
+            color: var(--bright-gold);
+        }
+        .blog-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .sidebar-widget {
+            background-color: var(--charcoal);
+            border: 1px solid var(--luxury-gold);
+            padding: 2rem;
+        }
+        .sidebar-widget h3 {
+            color: var(--luxury-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        .search-form {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+        }
+        .search-form button {
+            width: 100%;
+        }
+        .search-form input {
+            flex: 1;
+            padding: 10px 15px;
+            background-color: var(--primary-black);
+            border: 1px solid var(--luxury-gold);
+            color: var(--pure-white);
+        }
+        .search-form button {
+            padding: 10px 20px;
+            background-color: var(--luxury-gold);
+            border: 1px solid var(--luxury-gold);
+            color: var(--primary-black);
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .search-form button:hover {
+            background-color: var(--bright-gold);
+        }
+        .category-list {
+            list-style: none;
+        }
+        .category-list li {
+            margin-bottom: 0.75rem;
+        }
+        .category-list a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+        }
+        .category-list a:hover {
+            color: var(--luxury-gold);
+        }
+        .recent-posts-list {
+            list-style: none;
+        }
+        .recent-posts-list li {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .recent-posts-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .recent-post-title {
+            color: var(--luxury-gold);
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .recent-post-title:hover {
+            color: var(--bright-gold);
+        }
+        .recent-post-date {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+        @media (max-width: 1024px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+            .blog-sidebar {
+                order: -1;
+            }
+        }
+        @media (max-width: 768px) {
+            .blog-container {
+                padding: 0 1rem;
+            }
+            .blog-post-content {
+                padding: 1.5rem;
+            }
+            .sidebar-widget {
+                padding: 1.5rem;
+            }
+            .search-form {
+                flex-direction: column;
+            }
+            .search-form input,
+            .search-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">StyleLux</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li class="nav-dropdown">
+                    <a href="index.html">Home</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html">Home Page 1</a></li>
+                        <li><a href="index2.html">Home Page 2</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="nav-btn">Dashboard</a></li>
+                <li><a href="login.html" class="nav-btn">Login</a></li>
+                <li><a href="register.html" class="nav-btn nav-btn-primary">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="min-height: 60vh;">
+        <div class="hero-content">
+            <h1>Style Blog</h1>
+            <p>Fashion Tips, Trends & Style Guides</p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section id="blog-content" style="padding: 3rem 2rem;">
+        <div class="blog-container">
+            <div class="blog-main">
+                <article class="blog-post">
+                    <img src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" alt="Blog Post 1" class="blog-post-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'%3E%3Crect fill=\'%231A0F0A\' width=\'800\' height=\'400\'/%3E%3Ctext fill=\'%23E57C4A\' font-family=\'Arial\' font-size=\'24\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EBlog Image%3C/text%3E%3C/svg%3E'">
+                    <div class="blog-post-content">
+                        <div class="blog-post-meta">Fashion Tips • January 15, 2025</div>
+                        <h3>10 Essential Pieces for a Capsule Wardrobe</h3>
+                        <p>Building a capsule wardrobe doesn't have to be overwhelming. Discover the 10 essential pieces that will form the foundation of your versatile, timeless wardrobe...</p>
+                        <a href="#" class="blog-post-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" alt="Blog Post 2" class="blog-post-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'%3E%3Crect fill=\'%231A0F0A\' width=\'800\' height=\'400\'/%3E%3Ctext fill=\'%23E57C4A\' font-family=\'Arial\' font-size=\'24\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EBlog Image%3C/text%3E%3C/svg%3E'">
+                    <div class="blog-post-content">
+                        <div class="blog-post-meta">Style Guide • January 10, 2025</div>
+                        <h3>How to Dress for Your Body Type</h3>
+                        <p>Understanding your body type is the key to looking and feeling confident. Learn how to choose clothes that flatter your unique silhouette and enhance your natural features...</p>
+                        <a href="#" class="blog-post-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://images.pexels.com/photos/157675/fashion-men-s-individuality-black-and-white-157675.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" alt="Blog Post 3" class="blog-post-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'%3E%3Crect fill=\'%231A0F0A\' width=\'800\' height=\'400\'/%3E%3Ctext fill=\'%23E57C4A\' font-family=\'Arial\' font-size=\'24\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EBlog Image%3C/text%3E%3C/svg%3E'">
+                    <div class="blog-post-content">
+                        <div class="blog-post-meta">Trends • January 5, 2025</div>
+                        <h3>Spring 2025 Fashion Trends to Watch</h3>
+                        <p>Stay ahead of the curve with our guide to the hottest spring fashion trends. From bold colors to statement accessories, discover what's in this season...</p>
+                        <a href="#" class="blog-post-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" alt="Blog Post 4" class="blog-post-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'%3E%3Crect fill=\'%231A0F0A\' width=\'800\' height=\'400\'/%3E%3Ctext fill=\'%23E57C4A\' font-family=\'Arial\' font-size=\'24\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EBlog Image%3C/text%3E%3C/svg%3E'">
+                    <div class="blog-post-content">
+                        <div class="blog-post-meta">Fashion Tips • December 28, 2024</div>
+                        <h3>Mastering the Art of Accessorizing</h3>
+                        <p>Accessories can make or break an outfit. Learn the secrets to choosing and styling accessories that elevate your look without overwhelming it...</p>
+                        <a href="#" class="blog-post-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://images.pexels.com/photos/1300550/pexels-photo-1300550.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" alt="Blog Post 5" class="blog-post-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'%3E%3Crect fill=\'%231A0F0A\' width=\'800\' height=\'400\'/%3E%3Ctext fill=\'%23E57C4A\' font-family=\'Arial\' font-size=\'24\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EBlog Image%3C/text%3E%3C/svg%3E'">
+                    <div class="blog-post-content">
+                        <div class="blog-post-meta">Style Guide • December 20, 2024</div>
+                        <h3>Building a Professional Wardrobe on a Budget</h3>
+                        <p>Looking professional doesn't have to break the bank. Discover smart shopping strategies and investment pieces that will serve you for years to come...</p>
+                        <a href="#" class="blog-post-link">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-post">
+                    <img src="https://images.pexels.com/photos/1485031/pexels-photo-1485031.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" alt="Blog Post 6" class="blog-post-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'%3E%3Crect fill=\'%231A0F0A\' width=\'800\' height=\'400\'/%3E%3Ctext fill=\'%23E57C4A\' font-family=\'Arial\' font-size=\'24\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EBlog Image%3C/text%3E%3C/svg%3E'">
+                    <div class="blog-post-content">
+                        <div class="blog-post-meta">Fashion Tips • December 15, 2024</div>
+                        <h3>Color Theory in Fashion: Finding Your Palette</h3>
+                        <p>Understanding color theory can transform your wardrobe. Learn how to identify colors that complement your skin tone and create harmonious outfits...</p>
+                        <a href="#" class="blog-post-link">Read More →</a>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="blog-sidebar">
+                <!-- Search Widget -->
+                <div class="sidebar-widget">
+                    <h3>Search</h3>
+                    <form class="search-form" id="blog-search-form">
+                        <input type="text" placeholder="Search articles..." id="search-input">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="sidebar-widget">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="#">Fashion Tips <span>(12)</span></a></li>
+                        <li><a href="#">Style Guides <span>(8)</span></a></li>
+                        <li><a href="#">Trends <span>(6)</span></a></li>
+                        <li><a href="#">Wardrobe Essentials <span>(10)</span></a></li>
+                        <li><a href="#">Accessories <span>(5)</span></a></li>
+                        <li><a href="#">Color Theory <span>(4)</span></a></li>
+                        <li><a href="#">Body Type <span>(7)</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Recent Posts Widget -->
+                <div class="sidebar-widget">
+                    <h3>Recent Posts</h3>
+                    <ul class="recent-posts-list">
+                        <li>
+                            <a href="#" class="recent-post-title">10 Essential Pieces for a Capsule Wardrobe</a>
+                            <span class="recent-post-date">January 15, 2025</span>
+                        </li>
+                        <li>
+                            <a href="#" class="recent-post-title">How to Dress for Your Body Type</a>
+                            <span class="recent-post-date">January 10, 2025</span>
+                        </li>
+                        <li>
+                            <a href="#" class="recent-post-title">Spring 2025 Fashion Trends to Watch</a>
+                            <span class="recent-post-date">January 5, 2025</span>
+                        </li>
+                        <li>
+                            <a href="#" class="recent-post-title">Mastering the Art of Accessorizing</a>
+                            <span class="recent-post-date">December 28, 2024</span>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About StyleLux</h3>
+                <p>We are passionate about helping you discover and express your unique style through personalized fashion consulting services.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: <a href="mailto:info@stylelux.com">info@stylelux.com</a></p>
+                <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                <p>Address: 123 Fashion Street, Style City, SC 12345</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" aria-label="Facebook">
+                      <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2H14c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 3H12.4v7A10 10 0 0 0 22 12z"/></svg>
+                    </a>
+                  
+                    <a href="https://instagram.com" aria-label="Instagram">
+                      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </a>
+                  
+                    <a href="https://twitter.com" aria-label="Twitter">
+                      <svg viewBox="0 0 24 24"><path d="M22 5.8c-.8.4-1.7.6-2.6.8a4.5 4.5 0 0 0-7.7 4A12.7 12.7 0 0 1 3 4.9s-4 9 5 13a13 13 0 0 1-8 2c9 5 20 0 20-11v-.5A6.6 6.6 0 0 0 22 5.8z"/></svg>
+                    </a>
+                  
+                    <a href="https://pinterest.com" aria-label="Pinterest">
+                      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.5 19.4l.5-3A3.5 3.5 0 0 1 9 16c0-1 .4-2 .8-3-.4-1-.2-2.4.7-3.4 1.5-1.6 4.4-1.4 5.4.6 1 2.2-.2 5-2.6 5.3-.7.1-1.4-.3-1.6-1-.2-.7.2-1.5.4-2.2.3-.9.6-1.9.5-2.9-.1-2.4-3.6-2.2-4.1.2-.2.9.1 1.8.1 2.7-.1 2-.7 4-1.2 5.9A10 10 0 1 0 12 2z"/></svg>
+                    </a>
+                  </div>
+                  
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StyleLux. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Blog search functionality
+        document.getElementById('blog-search-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('search-input').value;
+            if (searchTerm.trim()) {
+                alert('Search functionality would search for: ' + searchTerm);
+                // In a real implementation, this would filter or redirect to search results
+            }
+        });
+    </script>
+</body>
+</html>
+
